@@ -86,7 +86,12 @@ export default {
       delegates: null,
       everydayArk: 422,
       arktoshi: 100000000,
-      columns: [
+    };
+  },
+
+  computed: {
+    columns() {
+      return [
         {
           title: this.$t("delegate_table.name"),
           key: "name",
@@ -122,50 +127,8 @@ export default {
           sorter: (a, b) => a.payout_interval - b.payout_interval,
           scopedSlots: { customRender: "minPayout" },
         },
-      ],
-    };
-  },
-
-  computed: {
-    // columns() {
-    //   return [
-    //     {
-    //       title: this.$t("delegate_table.name"),
-    //       key: "name",
-    //       dataIndex: "name",
-    //       sorter: (a, b) => a.rank - b.rank,
-    //       scopedSlots: { customRender: "name" },
-    //     },
-    //     {
-    //       title: this.$t("delegate_table.daily"),
-    //       dataIndex: "daily",
-    //       key: "daily",
-    //       sorter: (a, b) => a.daily - b.daily,
-    //       scopedSlots: { customRender: "daily" },
-    //     },
-    //     {
-    //       title: this.$t("delegate_table.weekly"),
-    //       key: "weekly",
-    //       dataIndex: "weekly",
-    //       sorter: (a, b) => a.weekly > b.weekly,
-    //       scopedSlots: { customRender: "weekly" },
-    //     },
-    //     {
-    //       title: this.$t("delegate_table.shares"),
-    //       key: "payout_percent",
-    //       dataIndex: "payout_percent",
-    //       sorter: (a, b) => a.payout_percent - b.payout_percent,
-    //       scopedSlots: { customRender: "share" },
-    //     },
-    //     {
-    //       title: this.$t("delegate_table.payout_interval"),
-    //       key: "payout_interval",
-    //       dataIndex: "payout_interval",
-    //       sorter: (a, b) => a.payout_interval - b.payout_interval,
-    //       scopedSlots: { customRender: "minPayout" },
-    //     },
-    //   ];
-    // },
+      ];
+    },
   },
 
   watch: {
