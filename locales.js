@@ -63,7 +63,7 @@ const messages = {
     stake_instruction: "SXP Yatırımı Nasıl Yapılır?",
     input_balance: "SXP Bakiyenizi Buraya Girin",
     voted: "Oylandı",
-    public: "Genel",
+    public: "Herkese Açık",
     private: "Özel",
     learn_more: "Daha fazlasını öğrenmek için tıklayın",
     delegate_table: {
@@ -85,27 +85,28 @@ const messages = {
     },
     instruction: {
       step: "Adım",
-      step_1_input: "SXP Bakiyenizi aşağıdaki <b>giriş alanına</b> girin:",
+      step_1_input: "SXP Bakiyenizi aşağıdaki <b>alana</b> girin:",
       step_1_description:
-        'İstediğiniz temsilciye zaten oy verdiyseniz, <b>"Oylandı"</b> Oylandı onay kutusunu işaretleyin.',
+        'İstediğiniz delegeye zaten oy verdiyseniz, <b>"Oylandı"</b> onay kutusunu işaretleyin.',
       step_2_description:
-        "Uygulama, her gün kazandığınız karı hesaplayacak ve büyük tabloda gösterecektir. Şimdi hangi delegeye oy vereceğinize karar vermeniz gerekecek.",
+        "Uygulama, her gün kazandığınız kârı hesaplayacak ve büyük tabloda gösterecektir. Şimdi hangi delegeye oy vereceğinize karar vermeniz gerekecek.",
       tips: "Bilmeniz gereken bazı ipuçları",
       tip_sort:
-        "Verileri sıralamak istiyorsanız tablo başlığına tıklamanız yeterlidir.",
+        "Verileri, sütun başlıklarına tıklayarak sıralayabilirsiniz.",
       tip_voted:
-        'İstediğiniz temsilciye zaten oy verdiyseniz, karınızı daha doğru hesaplamak için "Oylandı" onay kutusunu işaretleyin.',
+        'İstediğiniz delegeye zaten oy verdiyseniz, kârınızı daha doğru hesaplamak için "Oylandı" onay kutusunu işaretleyin.',
       tip_private:
-        "Bazı delegeler %0 paylaşım gösteriyor, delegelerin günlük ödeme için özel anlaşması olabilir, bunu kendiniz araştırıp bulmalısınız.",
+        "Paylaşım oranı %0 olarak belirtilen delegeler, özel paylaşım anlaşması dahilinde ödül dağıtıyor olabilir; bu durumda kendileriyle görüşebilirsiniz.",
       tip_detail:
         "Delege adına tıklayarak delege hakkında daha fazla bilgi edinebilirsiniz. (Delege hakkında bilgi edinmenizi şiddetle tavsiye ederim)",
-      tip_ranking: "Delege adının yanındaki kırmızı sayı sıralamadır.",
-      tip_payout: `Dikkatli olun! Günlük ödemenizi ne zaman alacağınızı hesaplarken;
-            Delegenin yaptığı <b>minimum ödeme</b> (delegenin belirlediği ödeme aralığında) miktarını
-            gözönünde bulundurun. Kazandığınız ödülü günlük olarak alabilmek için, delegenin belirlediği minimum
-            ödeme miktarının üstünde olmalıdır. <br />(Örneğin: Günlük kazancınız 0.005 SXP fakat
-            delegenin belirlediği minimum ödeme miktarı 0.01 SXP ise; ödülünüzü ancak 2 günde bir 
-            alabilirsiniz.)`,
+      tip_ranking: "Delege adının yanındaki kırmızı sayı delege sıralamasını belirtir.",
+      tip_payout: `Günlük ödemenizi ne zaman alacağınızı hesaplarken dikkat edilmesi gereken 
+            bir diğer nokta; Delegenin (belirlediği ödeme aralığında) yaptığı <b>minimum 
+            ödeme</b> miktarının göz önünde bulundurulmasıdır. Kazandığınız ödülün size 
+            günlük olarak dağıtılması için, tutar delegenin belirlediği minimum ödeme 
+            miktarının üstünde olmalıdır. <br />(Örneğin: Günlük kazancınız 0.005 SXP fakat
+            delegenin belirlediği minimum ödeme miktarı 0.01 SXP ise; 
+            ödülünüzü ancak 2 günde bir alabilirsiniz.)`,
       tip_fork: `Yazılımı fork etmekten ve sorunlarınızı
             <a
               class="underline"
