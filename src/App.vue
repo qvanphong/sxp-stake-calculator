@@ -33,58 +33,32 @@
       @ok="hideHowToUse"
     >
       <div>
-        <span class="font-bold">Step 1.</span>
-        <span>Input your ARK balance into the <b>input field</b> below:</span>
+        <p class="font-bold">
+          <span v-html="$t('instruction.step')"> 1.</span>
+          1.
+        </p>
+        <span v-html="$t('instruction.step_1_input')"></span>
         <img src="/img/tutorial_1.png" />
-        <span
-          >If you already voted for the delegate you are looking for, check the
-          <b>"Voted"</b> checkbox</span
-        >
+        <span v-html="$t('instruction.step_1_description')"></span>
         <br />
         <br />
-        <span class="mt-2 font-bold">Step 2.</span>
-        <span
-          >The app will calculate the profit you earn everyday and show in the
-          big table. Now you will have to make a decide which delegate you
-          should vote for yourself.
-        </span>
+        <p class="font-bold">
+          <span v-html="$t('instruction.step')"></span>
+          2.
+        </p>
+        <span>{{ $t("instruction.step_2_description") }}</span>
         <img src="/img/tutorial_2.png" />
         <br />
         <br />
-        <span class="mt-2 font-bold">Some tips you may need to know</span>
+        <span class="mt-2 font-bold">{{ $t("instruction.tips") }}</span>
         <ul class="list-disc">
-          <li>
-            If you want to sort the data, just click on the table heading.
-          </li>
-          <li>
-            If you already voted for the delegate you are looking for, check the
-            Voted check box, that will help calculate more accuracy.
-          </li>
-          <li>
-            Some delegate show 0% share, most of them have private deal for
-            daily payout, you have to find out yourself.
-          </li>
-          <li>
-            You can learn more about delegate by click on delegate name. (Highly
-            recommend learn about delegate)
-          </li>
-          <li>The red number next to the delegate name is ranking.</li>
-          <li>
-            Be careful! There is 1 more thing to decide when you will receive
-            your daily payout, that is <b>minimum payout</b>(in the payout
-            interval), your reward must meets the minimum payout that delegate
-            require. <br />(For example: Everyday you get 0.005 ark from
-            delegate, but their minimum payout is 0.01, which mean you will
-            receive your payout every 2 days.)
-          </li>
-          <li>
-            Feel free to fork or send an issue on
-            <a
-              class="underline"
-              href="https://github.com/qvanphong/ark-delegate-calculate"
-              >Github</a
-            >
-          </li>
+          <li>{{ $t("instruction.tip_sort") }}</li>
+          <li>{{ $t("instruction.tip_voted") }}</li>
+          <li>{{ $t("instruction.tip_private") }}</li>
+          <li>{{ $t("instruction.tip_detail") }}</li>
+          <li>{{ $t("instruction.tip_ranking") }}</li>
+          <li v-html="$t('instruction.tip_payout')"></li>
+          <li v-html="$t('instruction.tip_fork')"></li>
         </ul>
       </div>
     </Modal>

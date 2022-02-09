@@ -1,7 +1,7 @@
 const messages = {
   en: {
     title: "SXP Stake Calculator",
-    instruction: "How to use",
+    use_instruction: "How to use",
     stake_instruction: "How to stake SXP",
     input_balance: "Input your SXP balance here",
     voted: "Voted",
@@ -25,10 +25,40 @@ const messages = {
       semi_active: "Semi active",
       active: "Active",
     },
+    instruction: {
+      step: "Step",
+      step_1_input: "Input your SXP balance into the <b>input field</b> below:",
+      step_1_description:
+        'If you already voted for the delegate you are looking for, check the <b>"Voted"</b> checkbox',
+      step_2_description:
+        "The app will calculate the profit you earn everyday and show in the big table. Now you will have to make a decide which delegate you should vote for yourself.",
+      tips: "Some tips you may need to know",
+      tip_sort:
+        "If you want to sort the data, just click on the table heading.",
+      tip_voted:
+        'If you already voted for the delegate you are looking for, check the "Voted" check box, that will help calculate more accuracy.',
+      tip_private:
+        "Some delegate show 0% share, most of them have private deal for daily payout, you have to find out yourself.",
+      tip_detail:
+        "You can learn more about delegate by click on delegate name. (Highly recommend learn about delegate)",
+      tip_ranking: "The red number next to the delegate name is ranking.",
+      tip_payout: `Be careful! There is 1 more thing to decide when you will receive
+            your daily payout, that is <b>minimum payout</b>(in the payout
+            interval), your reward must meets the minimum payout that delegate
+            require. <br />(For example: Everyday you get 0.005 SXP from
+            delegate, but their minimum payout is 0.01, which mean you will
+            receive your payout every 2 days.)`,
+      tip_fork: `Feel free to fork or send an issue on
+            <a
+              class="underline"
+              href="https://github.com/qvanphong/sxp-stake-calculator"
+              >Github</a
+            >`,
+    },
   },
   vi: {
     title: "Công cụ tính stake SXP",
-    instruction: "Hướng dẫn",
+    use_instruction: "Hướng dẫn",
     stake_instruction: "Hướng dẫn stake",
     input_balance: "Nhập số SXP của bạn tại đây",
     voted: "Đã vote",
@@ -51,6 +81,33 @@ const messages = {
       never: "Chưa từng đóng góp",
       semi_active: "Có đóng góp",
       active: "Tích cực đóng góp",
+    },
+    instruction: {
+      step: "Bước",
+      step_1_input: "Nhập số SXP của bạn vào phần nhập như trong ảnh",
+      step_1_description:
+        'Nếu bạn đã vote cho delegate mà bạn đang tìm, hãy tick vào ô <b>"Đã Vote"</b>',
+      step_2_description:
+        "Ứng dụng sẽ tự động tính và đưa ra số SXP dự tính mà bạn sẽ nhận được.",
+      tips: "Một số mẹo bạn nên biết:",
+      tip_sort: "Nếu bạn muốn sắp xếp thứ thự dữ liệu, hãy nhấn vào tên cột",
+      tip_voted:
+        'Nếu bạn đã vote cho delegate mà bạn đang kiểm thử, hãy tick vào ô "Đã Vote", phần thưởng SXP sẽ có sự chênh lệch tùy vào bạn đã vote hay chưa.',
+      tip_private:
+        "Một số delegate trả thưởng 0%, đây là những delegate, họ chỉ trả thưởng cho một số người nhất định.",
+      tip_detail:
+        "Bạn có thể xem thông tin chi tiết của delegate nhờ bấm vào tên delegate. (Khuyến khích nên tìm hiểu về delegate mà bạn muốn vote)",
+      tip_ranking: "Số kế bên delegate chính là hạng của delegate dựa vào vote",
+      tip_payout: `Lưu ý! Nên để ý phần <b>Chu kỳ trả thưởng</b> Số lượng SXP thưởng của bạn phải tích lũy
+            đến số SXP mà delegate đề cập ra mới có thể nhận thưởng. <br />
+            (Ví dụ: Mỗi ngày bạn nhận được 0.005 SXP, nhưng delegate đề ra mức trả thưởng là 0.01 SXP.
+            Tức nghĩa là bạn sẽ cần đến 2 ngày mới có thể nhận được thưởng 1 lần)`,
+      tip_fork: `Bạn có thể xem qua, fork hoặc gửi issue vào
+            <a
+              class="underline"
+              href="https://github.com/qvanphong/sxp-stake-calculator"
+              >Github</a
+            > của mình`,
     },
   },
 };

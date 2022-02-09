@@ -12,9 +12,9 @@
           type="link"
           size="small"
           class="text-orange-400 text-lg font-bold hover:text-orange-700 p-0"
-          @click="openHowToUse"
+          @click="emitOpenHowToUse"
         >
-          <span class="font-bold">{{ $t("instruction") }}</span>
+          <span class="font-bold">{{ $t("use_instruction") }}</span>
         </a-button>
         <a class="text-orange-400 text-lg font-bold hover:text-orange-700">{{
           $t("stake_instruction")
@@ -64,7 +64,7 @@
         class="text-orange-400 text-md font-bold hover:text-orange-700 p-0"
         @click="emitOpenHowToUse"
       >
-        <span class="font-bold">{{ $t("instruction") }}</span>
+        <span class="font-bold">{{ $t("use_instruction") }}</span>
       </a-button>
       <a class="text-orange-400 text-md font-bold hover:text-orange-700">{{
         $t("stake_instruction")
