@@ -1,30 +1,37 @@
 <template>
-  <div id="app" class="flex flex-col items-center">
-    <div class="sm:w-full md:w-2/4 h-full">
+  <div id="app" class="flex flex-col items-center h-full">
+    <div class="sm:w-full lg:w-3/5 h-full">
       <div class="flex items-start py-4">
-        <img
-          style="width: auto; height: 48px"
-          src="https://ark.io/images/logo.svg"
-        />
+        <img style="width: auto; height: 48px" src="/img/logo_only.png" />
         <div class="ml-4">
-          <h2 class="text-xl font-bold">ARK Delegate Calculator</h2>
+          <h2 class="text-xl font-bold">{{ $t("title") }}</h2>
           <Button type="link" size="small" class="p-0" @click="openHowToUse">
-            How to use?
+            {{ $t("instruction") }}
           </Button>
+          <a-select
+            v-model="locale"
+            class="ml-4"
+            default-value="en"
+            style="width: 120px"
+            @change="handleI18NChange"
+          >
+            <a-select-option value="en"> English </a-select-option>
+            <a-select-option value="vi"> Tiếng Việt </a-select-option>
+          </a-select>
         </div>
       </div>
       <div class="mb-4 flex flex-row items-center">
         <InputNumber
           v-model="debounceInput"
-          placeholder="Input your ARK balance here"
+          :placeholder="$t('input_balance')"
           enter-button="Search"
           size="large"
-          suffix="Ѧ"
+          addon-after="SXP"
           style="flex: 0.8"
         />
         <Checkbox class="ml-8" style="flex: 0.2" @change="onVotedChange">
           <Tooltip title="If you already voted for this delegate, check this.">
-            <span class="font-bold">Voted</span>
+            <span class="font-bold">{{ $t("voted") }}</span>
           </Tooltip>
         </Checkbox>
       </div>
@@ -105,6 +112,7 @@
 <script>
 import { InputNumber, Tooltip, Checkbox, Button, Modal } from "ant-design-vue";
 import DelegateTable from "./components/DelegateTable.vue";
+
 import debounce from "debounce";
 
 export default {
@@ -123,6 +131,7 @@ export default {
       debounceInput: null,
       isVoted: false,
       modalVisible: false,
+      locale: null,
     };
   },
   watch: {
@@ -130,6 +139,16 @@ export default {
       if (e == null || e == "") this.balance = 0;
       else this.balance = e;
     }, 350),
+  },
+  created() {
+    const locale = localStorage.getItem("locale");
+
+    if (locale != null) {
+      this.locale = localStorage.getItem("locale");
+      this.$i18n.locale = this.locale;
+    } else {
+      this.locale = this.$i18n.locale;
+    }
   },
   methods: {
     onVotedChange(e) {
@@ -140,6 +159,10 @@ export default {
     },
     hideHowToUse() {
       this.modalVisible = false;
+    },
+    handleI18NChange(value) {
+      this.$i18n.locale = value;
+      localStorage.setItem("locale", value);
     },
   },
 };

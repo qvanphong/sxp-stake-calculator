@@ -8,10 +8,10 @@
   >
     <!-- Ant Table's cell slots, for custom design -->
     <div slot="name" slot-scope="text, record">
-      <Tooltip title="Click to learn more">
-        <span class="text-red-600 font-bold"> {{ record.rank }}. </span>
+      <Tooltip :title="$t('learn_more')">
+        <span class="text-orange-700 font-bold"> {{ record.rank }}. </span>
         <a
-          class="font-bold text-blue-600"
+          class="font-bold text-orange-700"
           target="_blank"
           :href="'https://arkdelegates.live/delegate/' + record.slug"
         >
@@ -22,27 +22,31 @@
       <div class="hidden md:block">
         <Tooltip
           :title="
-            'This is a ' +
-            (record.is_private ? 'private' : 'public') +
-            ' delegate.'
+            $t('delegate.status', {
+              status: $t(record.is_private ? 'private' : 'public'),
+            })
           "
         >
           <span class="text-gray-500 pr-2 font-bold text-xs">{{
-            record.is_private ? "Private" : "Public"
+            $t(record.is_private ? "private" : "public")
           }}</span>
         </Tooltip>
-        <Tooltip title="Contribute status">
-          <span class="text-gray-500 border-l-2 pl-2 font-bold text-xs">{{
-            record.contribution_status
-          }}</span>
+        <Tooltip :title="$t('delegate.contribute_status')">
+          <span class="text-gray-500 border-l-2 pl-2 font-bold text-xs">
+            {{
+              $t(`contribute.${record.contribution_status.replace("-", "_")}`)
+            }}
+          </span>
         </Tooltip>
       </div>
     </div>
     <span slot="daily" slot-scope="text" class="font-bold">
-      {{ text.toFixed(2) }} <span class="text-red-600">Ѧ</span></span
+      {{ text.toFixed(2) }}
+      <span class="text-orange-400">SXP</span></span
     >
     <span slot="weekly" slot-scope="text" class="font-bold">
-      {{ text.toFixed(2) }} <span class="text-red-600">Ѧ</span></span
+      {{ text.toFixed(2) }}
+      <span class="text-orange-400">SXP</span></span
     >
     <span slot="share" slot-scope="text" class="font-bold"> {{ text }}% </span>
     <div
@@ -53,7 +57,7 @@
       {{ text }}h
       <span class="font-bold">
         {{ calculateMinPayout(record.payout_minimum)
-        }}<span class="text-red-600"> Ѧ</span>
+        }}<span class="text-orange-400"> SXP</span>
       </span>
     </div>
   </Table>
@@ -61,44 +65,6 @@
 
 <script>
 import { Table, Tooltip } from "ant-design-vue";
-
-const columns = [
-  {
-    key: "name",
-    dataIndex: "name",
-    title: "Name",
-    sorter: (a, b) => a.rank - b.rank,
-    scopedSlots: { customRender: "name" },
-  },
-  {
-    title: "Daily Reward",
-    dataIndex: "daily",
-    key: "daily",
-    sorter: (a, b) => a.daily - b.daily,
-    scopedSlots: { customRender: "daily" },
-  },
-  {
-    key: "weekly",
-    title: "Weekly Reward",
-    dataIndex: "weekly",
-    sorter: (a, b) => a.weekly > b.weekly,
-    scopedSlots: { customRender: "weekly" },
-  },
-  {
-    key: "payout_percent",
-    title: "Shares",
-    dataIndex: "payout_percent",
-    sorter: (a, b) => a.payout_percent - b.payout_percent,
-    scopedSlots: { customRender: "share" },
-  },
-  {
-    key: "payout_interval",
-    title: "Payout Interval",
-    dataIndex: "payout_interval",
-    sorter: (a, b) => a.payout_interval - b.payout_interval,
-    scopedSlots: { customRender: "minPayout" },
-  },
-];
 
 export default {
   name: "DelegateTable",
@@ -117,11 +83,89 @@ export default {
 
   data() {
     return {
-      columns,
       delegates: null,
       everydayArk: 422,
-      arktoshiRate: 100000000,
+      arktoshi: 100000000,
+      columns: [
+        {
+          title: this.$t("delegate_table.name"),
+          key: "name",
+          dataIndex: "name",
+          sorter: (a, b) => a.rank - b.rank,
+          scopedSlots: { customRender: "name" },
+        },
+        {
+          title: this.$t("delegate_table.daily"),
+          dataIndex: "daily",
+          key: "daily",
+          sorter: (a, b) => a.daily - b.daily,
+          scopedSlots: { customRender: "daily" },
+        },
+        {
+          title: this.$t("delegate_table.weekly"),
+          key: "weekly",
+          dataIndex: "weekly",
+          sorter: (a, b) => a.weekly > b.weekly,
+          scopedSlots: { customRender: "weekly" },
+        },
+        {
+          title: this.$t("delegate_table.shares"),
+          key: "payout_percent",
+          dataIndex: "payout_percent",
+          sorter: (a, b) => a.payout_percent - b.payout_percent,
+          scopedSlots: { customRender: "share" },
+        },
+        {
+          title: this.$t("delegate_table.payout_interval"),
+          key: "payout_interval",
+          dataIndex: "payout_interval",
+          sorter: (a, b) => a.payout_interval - b.payout_interval,
+          scopedSlots: { customRender: "minPayout" },
+        },
+      ],
     };
+  },
+
+  computed: {
+    // columns() {
+    //   return [
+    //     {
+    //       title: this.$t("delegate_table.name"),
+    //       key: "name",
+    //       dataIndex: "name",
+    //       sorter: (a, b) => a.rank - b.rank,
+    //       scopedSlots: { customRender: "name" },
+    //     },
+    //     {
+    //       title: this.$t("delegate_table.daily"),
+    //       dataIndex: "daily",
+    //       key: "daily",
+    //       sorter: (a, b) => a.daily - b.daily,
+    //       scopedSlots: { customRender: "daily" },
+    //     },
+    //     {
+    //       title: this.$t("delegate_table.weekly"),
+    //       key: "weekly",
+    //       dataIndex: "weekly",
+    //       sorter: (a, b) => a.weekly > b.weekly,
+    //       scopedSlots: { customRender: "weekly" },
+    //     },
+    //     {
+    //       title: this.$t("delegate_table.shares"),
+    //       key: "payout_percent",
+    //       dataIndex: "payout_percent",
+    //       sorter: (a, b) => a.payout_percent - b.payout_percent,
+    //       scopedSlots: { customRender: "share" },
+    //     },
+    //     {
+    //       title: this.$t("delegate_table.payout_interval"),
+    //       key: "payout_interval",
+    //       dataIndex: "payout_interval",
+    //       sorter: (a, b) => a.payout_interval - b.payout_interval,
+    //       scopedSlots: { customRender: "minPayout" },
+    //     },
+    //   ];
+    // },
   },
 
   watch: {
@@ -129,18 +173,25 @@ export default {
       this.calculate(newVal, this.isVoted);
     },
     voted(newVal) {
-      console.log(newVal);
       this.calculate(this.balance, newVal);
     },
   },
-
   async mounted() {
-    const delegates = await this.$store.dispatch("getTopDelegate");
-    delegates.map((delegate) => {
-      delegate.daily = 0;
-      delegate.weekly = 0;
-    });
-    this.delegates = delegates;
+    const response = await this.$axios
+      .get("/api/delegates?limit=51")
+      .catch((err) => {
+        console.log("Error: ", err.message);
+      });
+
+    if (response != null) {
+      const delegates = response.data.data;
+      delegates.map((delegate) => {
+        delegate.daily = 0;
+        delegate.weekly = 0;
+      });
+
+      this.delegates = delegates;
+    }
   },
 
   methods: {
@@ -157,8 +208,7 @@ export default {
         } else {
           const shares = (this.everydayArk * delegate.payout_percent) / 100;
           const votingRate =
-            parseInt(delegate.delegateStatistics.voting_power) /
-            this.arktoshiRate;
+            parseInt(delegate.delegateStatistics.voting_power) / this.arktoshi;
 
           delegate.daily =
             shares / ((votingRate + (isVoted ? 0 : balance)) / balance);
@@ -170,7 +220,7 @@ export default {
       if (minPayout == null || minPayout == 0) {
         return 0;
       } else {
-        return (parseInt(minPayout) / this.arktoshiRate).toFixed(2);
+        return (parseInt(minPayout) / this.arktoshi).toFixed(2);
       }
     },
     isMobile() {
