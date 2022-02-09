@@ -1,25 +1,7 @@
 <template>
   <div id="app" class="flex flex-col items-center h-full">
     <div class="sm:w-full lg:w-3/5 h-full">
-      <div class="flex items-start py-4">
-        <img style="width: auto; height: 48px" src="/img/logo_only.png" />
-        <div class="ml-4">
-          <h2 class="text-xl font-bold">{{ $t("title") }}</h2>
-          <Button type="link" size="small" class="p-0" @click="openHowToUse">
-            {{ $t("instruction") }}
-          </Button>
-          <a-select
-            v-model="locale"
-            class="ml-4"
-            default-value="en"
-            style="width: 120px"
-            @change="handleI18NChange"
-          >
-            <a-select-option value="en"> English </a-select-option>
-            <a-select-option value="vi"> Tiếng Việt </a-select-option>
-          </a-select>
-        </div>
-      </div>
+      <Menu @openHowToUse="openHowToUse"></Menu>
       <div class="mb-4 flex flex-row items-center">
         <InputNumber
           v-model="debounceInput"
@@ -110,8 +92,9 @@
 </template>
 
 <script>
-import { InputNumber, Tooltip, Checkbox, Button, Modal } from "ant-design-vue";
+import { InputNumber, Tooltip, Checkbox, Modal } from "ant-design-vue";
 import DelegateTable from "./components/DelegateTable.vue";
+import Menu from "./components/Menu.vue";
 
 import debounce from "debounce";
 
@@ -122,8 +105,8 @@ export default {
     InputNumber,
     Checkbox,
     Tooltip,
-    Button,
     Modal,
+    Menu,
   },
   data() {
     return {
@@ -131,7 +114,6 @@ export default {
       debounceInput: null,
       isVoted: false,
       modalVisible: false,
-      locale: null,
     };
   },
   watch: {
@@ -140,16 +122,7 @@ export default {
       else this.balance = e;
     }, 350),
   },
-  created() {
-    const locale = localStorage.getItem("locale");
 
-    if (locale != null) {
-      this.locale = localStorage.getItem("locale");
-      this.$i18n.locale = this.locale;
-    } else {
-      this.locale = this.$i18n.locale;
-    }
-  },
   methods: {
     onVotedChange(e) {
       this.isVoted = e.target.checked;
@@ -159,10 +132,6 @@ export default {
     },
     hideHowToUse() {
       this.modalVisible = false;
-    },
-    handleI18NChange(value) {
-      this.$i18n.locale = value;
-      localStorage.setItem("locale", value);
     },
   },
 };

@@ -1,7 +1,8 @@
 const messages = {
   en: {
     title: "SXP Stake Calculator",
-    instruction: "How to use?",
+    instruction: "How to use",
+    stake_instruction: "How to stake SXP",
     input_balance: "Input your SXP balance here",
     voted: "Voted",
     public: "Public",
@@ -27,7 +28,8 @@ const messages = {
   },
   vi: {
     title: "Công cụ tính stake SXP",
-    instruction: "Hướng dẫn sử dụng",
+    instruction: "Hướng dẫn",
+    stake_instruction: "Hướng dẫn stake",
     input_balance: "Nhập số SXP của bạn tại đây",
     voted: "Đã vote",
     public: "Công khai",
