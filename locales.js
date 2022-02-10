@@ -56,6 +56,65 @@ const messages = {
             >`,
     },
   },
+
+  tr: {
+    title: "SXP Yatırım Hesaplayıcı",
+    use_instruction: "Nasıl Kullanılır",
+    stake_instruction: "SXP Yatırımı Nasıl Yapılır?",
+    input_balance: "SXP Bakiyenizi Buraya Girin",
+    voted: "Oylandı",
+    public: "Herkese Açık",
+    private: "Özel",
+    learn_more: "Daha fazlasını öğrenmek için tıklayın",
+    delegate_table: {
+      name: "Adı",
+      daily: "Günlük Ödül",
+      weekly: "Haftalık Ödül",
+      shares: "Paylaşım",
+      payout_interval: "Ödeme Aralığı",
+    },
+    delegate: {
+      status: "Bu bir {status} delegedir.",
+      contribute_status: "Katkı durumu",
+    },
+    contribute: {
+      inactive: "İnaktif",
+      never: "Hiç",
+      semi_active: "Yarı aktif",
+      active: "Aktif",
+    },
+    instruction: {
+      step: "Adım",
+      step_1_input: "SXP Bakiyenizi aşağıdaki <b>alana</b> girin:",
+      step_1_description:
+        'İstediğiniz delegeye zaten oy verdiyseniz, <b>"Oylandı"</b> onay kutusunu işaretleyin.',
+      step_2_description:
+        "Uygulama, her gün kazandığınız kârı hesaplayacak ve büyük tabloda gösterecektir. Şimdi hangi delegeye oy vereceğinize karar vermeniz gerekecek.",
+      tips: "Bilmeniz gereken bazı ipuçları",
+      tip_sort: "Verileri, sütun başlıklarına tıklayarak sıralayabilirsiniz.",
+      tip_voted:
+        'İstediğiniz delegeye zaten oy verdiyseniz, kârınızı daha doğru hesaplamak için "Oylandı" onay kutusunu işaretleyin.',
+      tip_private:
+        "Paylaşım oranı %0 olarak belirtilen delegeler, özel paylaşım anlaşması dahilinde ödül dağıtıyor olabilir; bu durumda kendileriyle görüşebilirsiniz.",
+      tip_detail:
+        "Delege adına tıklayarak delege hakkında daha fazla bilgi edinebilirsiniz. (Delege hakkında bilgi edinmenizi şiddetle tavsiye ederim)",
+      tip_ranking:
+        "Delege adının yanındaki kırmızı sayı delege sıralamasını belirtir.",
+      tip_payout: `Günlük ödemenizi ne zaman alacağınızı hesaplarken dikkat edilmesi gereken
+            bir diğer nokta; Delegenin (belirlediği ödeme aralığında) yaptığı <b>minimum
+            ödeme</b> miktarının göz önünde bulundurulmasıdır. Kazandığınız ödülün size
+            günlük olarak dağıtılması için, tutar delegenin belirlediği minimum ödeme
+            miktarının üstünde olmalıdır. <br />(Örneğin: Günlük kazancınız 0.005 SXP fakat
+            delegenin belirlediği minimum ödeme miktarı 0.01 SXP ise;
+            ödülünüzü ancak 2 günde bir alabilirsiniz.)`,
+      tip_fork: `Yazılımı fork etmekten ve sorunlarınızı
+            <a
+              class="underline"
+              href="https://github.com/qvanphong/sxp-stake-calculator"
+              >Github</a
+            >a göndermekten çekinmeyin`,
+    },
+  },
   vi: {
     title: "Công cụ tính stake SXP",
     use_instruction: "Hướng dẫn",

@@ -33,6 +33,7 @@
           @change="handleI18NChange"
         >
           <a-select-option value="en"> English </a-select-option>
+          <a-select-option value="tr"> Turkish </a-select-option>
           <a-select-option value="vi"> Tiếng Việt </a-select-option>
         </a-select>
       </div>
@@ -82,6 +83,7 @@
         @change="handleI18NChange"
       >
         <a-select-option value="en"> English </a-select-option>
+        <a-select-option value="tr"> Turkish </a-select-option>
         <a-select-option value="vi"> Tiếng Việt </a-select-option>
       </a-select>
     </div>
