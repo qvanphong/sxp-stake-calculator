@@ -1,3 +1,3 @@
 export default ($axios) => ({
-  getTopDelegates: async () => await $axios.get("/api/delegates?limit=51"),
+  getTopDelegates: async () => await $axios.get("/api/v1/delegates/"),
 });

@@ -3,23 +3,25 @@
     :pagination="false"
     :columns="columns"
     :data-source="delegates"
-    row-key="name"
+    row-key="username"
     :scroll="{ y: isMobile() ? 480 : 740 }"
   >
     <!-- Ant Table's cell slots, for custom design -->
-    <div slot="name" slot-scope="text, record">
+    <div slot="username" slot-scope="text, record">
       <Tooltip :title="$t('learn_more')">
         <span class="text-orange-700 font-bold"> {{ record.rank }}. </span>
         <a
           class="font-bold text-orange-700"
           target="_blank"
-          :href="'https://arkdelegates.live/delegate/' + record.slug"
+          :href="
+            'https://delegates.solar.network/dsxp/delegates/' + record.slug
+          "
         >
           {{ text }}
         </a>
       </Tooltip>
 
-      <div class="hidden md:block">
+      <!-- <div class="hidden md:block">
         <Tooltip
           :title="
             $t('delegate.status', {
@@ -38,7 +40,7 @@
             }}
           </span>
         </Tooltip>
-      </div>
+      </div> -->
     </div>
     <span slot="daily" slot-scope="text" class="font-bold">
       {{ text.toFixed(2) }}
@@ -56,7 +58,7 @@
     >
       {{ text }}h
       <span class="font-bold">
-        {{ calculateMinPayout(record.payout_minimum)
+        {{ arktoshiToArk(record.payout_minimum)
         }}<span class="text-orange-400"> SXP</span>
       </span>
     </div>
@@ -84,8 +86,10 @@ export default {
   data() {
     return {
       delegates: null,
-      everydayArk: 422,
       arktoshi: 100000000,
+      minDelegateReward: 6.75,
+      maxDelegateReward: 13.25,
+      rewardStep: 0.125,
     };
   },
 
@@ -94,10 +98,10 @@ export default {
       return [
         {
           title: this.$t("delegate_table.name"),
-          key: "name",
-          dataIndex: "name",
+          key: "username",
+          dataIndex: "username",
           sorter: (a, b) => a.rank - b.rank,
-          scopedSlots: { customRender: "name" },
+          scopedSlots: { customRender: "username" },
         },
         {
           title: this.$t("delegate_table.daily"),
@@ -139,18 +143,23 @@ export default {
       this.calculate(this.balance, newVal);
     },
   },
+
   async mounted() {
     const response = await this.$axios
-      .get("/api/delegates?limit=51")
+      .get("/api/v1/delegates/")
       .catch((err) => {
         console.log("Error: ", err.message);
       });
 
     if (response != null) {
-      const delegates = response.data.data;
+      const delegates = response.data;
+
       delegates.map((delegate) => {
         delegate.daily = 0;
         delegate.weekly = 0;
+        delegate.payout_percent = delegate.payout;
+        delegate.payout_interval = delegate.payoutInterval;
+        delegate.voting_power = delegate.votes;
       });
 
       this.delegates = delegates;
@@ -163,15 +172,18 @@ export default {
         if (
           delegate.payout_percent == 0 ||
           delegate.payout_percent == null ||
-          delegate.delegateStatistics.voting_power == 0 ||
-          delegate.delegateStatistics.voting_power == null
+          delegate.voting_power == 0 ||
+          delegate.voting_power == null
         ) {
           delegate.daily = 0;
           delegate.weekly = 0;
         } else {
-          const shares = (this.everydayArk * delegate.payout_percent) / 100;
-          const votingRate =
-            parseInt(delegate.delegateStatistics.voting_power) / this.arktoshi;
+          const dailyIncomeOfDelegate = this.calculateDailyIncome(
+            delegate.rank
+          );
+          const shares =
+            (dailyIncomeOfDelegate * delegate.payout_percent) / 100;
+          const votingRate = parseInt(delegate.voting_power) / this.arktoshi;
 
           delegate.daily =
             shares / ((votingRate + (isVoted ? 0 : balance)) / balance);
@@ -179,13 +191,23 @@ export default {
         }
       });
     },
-    calculateMinPayout(minPayout) {
-      if (minPayout == null || minPayout == 0) {
+
+    arktoshiToArk(value) {
+      if (value == null || value == 0) {
         return 0;
       } else {
-        return (parseInt(minPayout) / this.arktoshi).toFixed(2);
+        return (parseInt(value) / this.arktoshi).toFixed(2);
       }
     },
+
+    calculateDailyIncome(rank) {
+      let secondPerRound = 424;
+      let secondInDay = 86400;
+      let rankReward = this.minDelegateReward + (rank - 1) * 0.125;
+
+      return (secondInDay / secondPerRound) * rankReward;
+    },
+
     isMobile() {
       if (
         /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(

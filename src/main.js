@@ -17,7 +17,7 @@ const i18n = new VueI18n({
 });
 
 const axiosConfig = {
-  baseURL: "https://arkdelegates.live/",
+  baseURL: "http://194.233.86.213:8081/",
 };
 
 Vue.config.productionTip = false;

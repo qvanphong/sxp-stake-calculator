@@ -116,7 +116,7 @@ const messages = {
     },
   },
   vi: {
-    title: "Công cụ tính stake SXP",
+    title: "Bộ Tính Stake SXP",
     use_instruction: "Hướng dẫn",
     stake_instruction: "Hướng dẫn stake",
     input_balance: "Nhập số SXP của bạn tại đây",
