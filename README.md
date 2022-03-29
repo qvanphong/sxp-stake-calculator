@@ -1,4 +1,6 @@
-# delegate-calculator
+# SXP Stake Calculator
+
+Helping you to check your reward by voting delegates.
 
 ## Project setup
 ```
