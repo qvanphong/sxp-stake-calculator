@@ -17,6 +17,7 @@
           <span>{{ $t("use_instruction") }}</span>
         </a-button>
         <a
+	    href="https://sxpdirectory.com/stake-sxp/"
           class="text-orange-400 text-md font-semibold hover:text-orange-700"
           >{{ $t("stake_instruction") }}</a
         >
