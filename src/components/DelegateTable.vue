@@ -13,9 +13,7 @@
         <a
           class="font-bold text-orange-700"
           target="_blank"
-          :href="
-            'https://delegates.solar.network/dsxp/delegates/' + record.slug
-          "
+          :href="'https://delegates.solar.org/sxp/delegates/' + record.username"
         >
           {{ text }}
         </a>
