@@ -1,15 +1,15 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <div class="border-b border-theme-secondary-300 dark:border-theme-secondary-800 dark:bg-theme-secondary-900">
+  <div class="border-b border-theme-secondary-300 dark:border-theme-secondary-800 dark:bg-theme-secondary-900 mx-4 md:mx-auto">
     <header
-      class="flex flex-row container mx-auto items-center"
+      class="flex flex-row container mx-auto items-stretch"
     >
       <div class="navbar-name py-4">
         <a>
           <span class="flex flex-row items-center text-black dark:text-white">
             <IconSolar class="h-10 mr-4" />
             <router-link to="/">
-              <span class="text-2xl font-bold">{{ delegateName }} Dashboard</span>
+              <span class="text-2xl font-bold">SXP Stake Calculator</span>
             </router-link>
           </span>
         </a>
@@ -120,9 +120,7 @@
 <script>
 import IconSolar from '@/components/icons/IconSolar.vue'
 
-import { mapState } from 'pinia'
-import { useDelegateStore } from '@/stores/delegate'
-import { isSuccess, execGetRequest } from '@/util/http-common.js'
+import { execGetRequest } from '@/util/http-common.js'
 
 export default {
   components: {
@@ -132,12 +130,13 @@ export default {
     return {
       menuItems: [
         {
-          title: 'Payout',
-          link: 'payment',
+          title: 'How To Stake',
+          link: 'https://sxpdirectory.com/stake-sxp/',
+          externalLink: true,
         },
         {
-          title: 'Proposal & Contributes',
-          link: ``,
+          title: 'SXPViet',
+          link: 'https://sxpviet.com/',
           externalLink: true,
         },
       ],
@@ -145,19 +144,6 @@ export default {
       onDarkMode: false,
       openMobileMenu: false
     }
-  },
-
-  computed: {
-    ...mapState(useDelegateStore, {
-      delegateName: 'name',
-    }),
-  },
-
-  watch: {
-    delegateName(value) {
-      const proposalIndex = this.menuItems.findIndex((item) => item.title === 'Proposal & Contributes')
-      this.menuItems[proposalIndex].link = `https://delegates.solar.org/sxp/delegates/${value}`
-    },
   },
 
   created() {
@@ -184,9 +170,7 @@ export default {
 
     fetchSxpPrice() {
       execGetRequest('https://api.coingecko.com/api/v3/simple/price?ids=swipe&vs_currencies=usd', (response) => {
-        if (isSuccess(response)) {
-          this.price = response.data.swipe.usd
-        }
+        this.price = Number.parseFloat(response.swipe.usd).toFixed(2)
       })
     },
   },

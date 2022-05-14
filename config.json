@@ -1,3 +1,4 @@
 {
-	"api_url": "http://xx.xx.x.x:xxxx/"
+	"sxp_api_url": "https://sxp.mainnet.sh/api",
+	"backend_api": "https://calculator.sxpviet.com/api/v1"
 }

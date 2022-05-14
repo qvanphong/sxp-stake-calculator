@@ -1,7 +1,5 @@
 <script>
 import Navbar from "@/components/Navbar.vue";
-import { HTTP, isSuccess } from "@/util/http-common.js";
-import { useDelegateStore } from '@/stores/delegate'
 
 export default {
   components: {
@@ -9,14 +7,6 @@ export default {
   },
 
   created() {
-    const delegateStore = useDelegateStore();
-
-    HTTP.get('/info').then(response => {
-      if (isSuccess) {
-        delegateStore.setDelegateInfo(response.data);
-      }
-    })
-
     this.checkAndEnableDarkMode();
   },
 

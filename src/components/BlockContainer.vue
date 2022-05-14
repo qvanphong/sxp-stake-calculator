@@ -7,34 +7,24 @@
           class="flex grid-cols-2 gap-3 w-full md:grid xl:flex xl:gap-0 xl:space-x-3 xl:justify-center"
         >
           <BlockItem
-            title="Rank"
-            :value="`#${rank}`"
-            icon="ranking-star"
-          />
-          <BlockItem
-            title="Forged"
-            :value="`${forged} blocks`"
+            title="Height"
+            :value="`${height}`"
             icon="hammer"
           />
           <BlockItem
-            title="Total votes"
-            :value="`${arktoshiToArk(totalVotes)} SXP`"
+            title="Total supply"
+            :value="`${totalSupplyAsArk} SXP`"
             icon="list"
           />
           <BlockItem
-            title="Total voters"
-            :value="totalVoters"
+            title="Total votes"
+            :value="totalVotes"
             icon="user-group"
           />
           <BlockItem
-            title="Sharing"
-            :value="`${sharing}%`"
+            title="Market Cap"
+            :value="`${marketCap} USD`"
             icon="chart-pie"
-          />
-          <BlockItem
-            title="Payout every"
-            :value="`${payoutInterval} blocks`"
-            icon="money-bill"
           />
         </div>
       </div>
@@ -45,19 +35,47 @@
 <script>
 import BlockItem from '@/components/BlockItem.vue'
 
-import { mapState } from 'pinia'
-import { useDelegateStore } from '@/stores/delegate'
 import { arktoshiToArk } from '@/util/converter.js'
+import { execGetRequest, API_URL } from '@/util/http-common.js'
 
 export default {
   components: {
-    BlockItem,
+    BlockItem
+  },
+  data() {
+    return {
+      height: "0",
+      supply: 0,
+      marketCap: "0",
+      totalVotes: "0%",
+    }
   },
   computed: {
-    ...mapState(useDelegateStore, ['rank', 'sharing', 'payoutInterval', 'totalVotes', 'totalVoters', 'forged']),
+    totalSupplyAsArk() {
+      return (arktoshiToArk(this.supply)).toLocaleString('en');
+    }
+  },
+  created() {
+    this.fetchBlockchainData();
+    this.fetchMarketCap();
   },
   methods: {
-    arktoshiToArk
+    arktoshiToArk,
+
+    fetchBlockchainData() {
+      execGetRequest(API_URL.SXP + '/blockchain', (response) => {
+        const responseData = response.data
+        this.height = responseData.block.height.toLocaleString('en')
+        this.supply = parseInt(responseData.supply);
+      })
+    },
+
+    fetchMarketCap() {
+      const url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=swipe&order=market_cap_desc&per_page=1&page=1&sparkline=false';
+      execGetRequest(url, (response) => {
+        this.marketCap = response[0].market_cap.toLocaleString('en');
+      })
+    }
   }
 }
 </script>

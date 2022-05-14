@@ -1,4 +1,5 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
+const colors = require("tailwindcss/colors");
 
 module.exports = {
   content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
@@ -72,6 +73,9 @@ module.exports = {
       black: "#121213",
       white: "#ffffff",
       transparent: "transparent",
+      orange: colors.orange,
+      lime: colors.lime,
+      red: colors.red,
 
       // Tailwind overrides
       "theme-primary-50": "var(--theme-color-primary-50)",
