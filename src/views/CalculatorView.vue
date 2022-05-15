@@ -1,7 +1,7 @@
 <template>
   <BlockContainer />
   <div class="container mx-auto my-6">
-    <div class="px-4 py-4 md:px-0 sticky top-0 dark:bg-theme-secondary-900 z-50 grid grid-cols-1 gap-4 lg:flex lg:flex-row lg:items-center ">
+    <div class="px-4 py-4 md:px-0 sticky top-0 bg-white dark:bg-theme-secondary-900 z-50 grid grid-cols-1 gap-4 lg:flex lg:flex-row lg:items-center ">
       <div class="flex flex-row items-center w-full md:w-3/5 lg:w-1/4 space-x-4">
         <input
           v-model.lazy="inputBalance"
