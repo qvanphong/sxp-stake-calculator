@@ -18,7 +18,7 @@
           />
           <BlockItem
             title="Total votes"
-            :value="totalVotes"
+            :value="`${totalVotesAsArk} SXP`"
             icon="user-group"
           />
           <BlockItem
@@ -47,16 +47,21 @@ export default {
       height: "0",
       supply: 0,
       marketCap: "0",
-      totalVotes: "0%",
+      totalVotes: 0,
     }
   },
   computed: {
     totalSupplyAsArk() {
       return (arktoshiToArk(this.supply)).toLocaleString('en');
+    },
+    totalVotesAsArk () {
+      return (arktoshiToArk(this.totalVotes)).toLocaleString('en');
     }
   },
+
   created() {
     this.fetchBlockchainData();
+    this.fetchTotalVotes();
     this.fetchMarketCap();
   },
   methods: {
@@ -75,7 +80,13 @@ export default {
       execGetRequest(url, (response) => {
         this.marketCap = response[0].market_cap.toLocaleString('en');
       })
-    }
+    },
+
+    fetchTotalVotes() {
+      execGetRequest(API_URL.BACKEND + '/totalVotes', (response) => {
+        this.totalVotes = response
+      })
+    },
   }
 }
 </script>

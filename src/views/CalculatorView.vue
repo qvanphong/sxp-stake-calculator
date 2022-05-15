@@ -211,7 +211,7 @@ export default {
   methods: {
     arktoshiToArk,
     fetchDelegates() {
-      execGetRequest(API_URL.BACKEND + '/delegates/', (response) => {
+      execGetRequest(API_URL.BACKEND + '/delegates', (response) => {
         this.delegates = response.map((delegate) => {
           delegate.daily = 0
           delegate.weekly = 0
