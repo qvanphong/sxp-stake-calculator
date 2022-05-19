@@ -11,16 +11,17 @@ const calculateDailyIncome = (rank) => {
 }
 
 const getRankDiff = (delegates, delegateName, votes) => {
-  return delegates.filter((delegate) => delegate.username != delegateName && delegate.votes > votes).length
+  if (delegates.length === 0) return 0;
+  return delegates.filter((delegate) => delegate.votes < votes).length;
 }
 
 const calculateStake = (delegates, balance, isVoted) => {
 	const result = delegates;
 
 	if (!isVoted) {
-		result.map(delegate => {
+		result.map((delegate, index) => {
 			const votesAfterVoting = delegate.votes + balance;
-			const rankDiff = getRankDiff(result, delegate.username, votesAfterVoting)
+			const rankDiff = getRankDiff(result.slice(0, index), delegate.username, votesAfterVoting)
 
 			delegate.rankDiff = rankDiff
 			return delegate;
