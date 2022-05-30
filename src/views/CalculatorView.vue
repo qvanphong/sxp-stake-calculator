@@ -263,7 +263,10 @@ export default {
       }
 
       this.delegates = this.delegates.sort((a, b) => {
-        return a[this.sortedBy] > b[this.sortedBy] ? -1 : (a[this.sortedBy] < b[this.sortedBy] ? 1 : 0);
+        const first = Number.parseFloat(a[this.sortedBy]);
+        const second = Number.parseFloat(b[this.sortedBy]);
+
+        return first > second ? -1 : (first < second ? 1 : 0);
       })
     }
   }

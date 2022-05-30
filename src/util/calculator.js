@@ -36,19 +36,19 @@ const calculateIncome = (delegate, balance, isVoted) => {
   if (balance == 0 || balance == '0' || balance == '') {
     delegate.daily = 0
     delegate.weekly = 0
-	delegate.userVoteWeight = 0
-	delegate.votedTotalVotes = delegate.votes
+	  delegate.userVoteWeight = 0
+	  delegate.votedTotalVotes = delegate.votes
   } else {
-	const rank = delegate.rank - (!isVoted && delegate.rankDiff ? delegate.rankDiff : 0)
+	  const rank = delegate.rank - (!isVoted && delegate.rankDiff ? delegate.rankDiff : 0)
     const dailyIncomeOfDelegate = calculateDailyIncome(rank)
     const shares = (dailyIncomeOfDelegate * delegate.payout) / 100
     const votingRate = delegate.votes
-	const votesAfterVoting = (votingRate + (isVoted ? 0 : balance))
+	  const votesAfterVoting = (votingRate + (isVoted ? 0 : balance))
 
     delegate.daily = Number.parseFloat(shares / (votesAfterVoting / balance)).toFixed(2)
     delegate.weekly = Number.parseFloat(delegate.daily * 7).toFixed(2)
-	delegate.votedTotalVotes = votesAfterVoting
-	delegate.userVoteWeight =  Number.parseFloat(balance * 100 / votesAfterVoting).toFixed(2)
+	  delegate.votedTotalVotes = votesAfterVoting
+	  delegate.userVoteWeight =  Number.parseFloat(balance * 100 / votesAfterVoting).toFixed(2)
   }
 
   return delegate
